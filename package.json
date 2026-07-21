@@ -1,0 +1,58 @@
+{
+  "name": "agent-loop-guard",
+  "version": "0.1.0",
+  "description": "Detect repeated, stagnant, and cyclic tool calls, and enforce call-budget limits for LLM agents",
+  "type": "module",
+  "main": "./src/index.js",
+  "exports": {
+    ".": {
+      "types": "./src/index.d.ts",
+      "import": "./src/index.js"
+    }
+  },
+  "files": [
+    "src"
+  ],
+  "scripts": {
+    "test": "node --test test/*.test.js",
+    "typecheck": "tsc --noEmit --strict --module NodeNext --moduleResolution NodeNext --target ES2022 test/consumer.ts",
+    "check": "npm run test && npm run typecheck",
+    "prepublishOnly": "npm run check"
+  },
+  "keywords": [
+    "llm",
+    "agent",
+    "loop-detection",
+    "tool-calling",
+    "ai-agents",
+    "autonomous-agents",
+    "cycle-detection",
+    "agent-safety",
+    "typescript",
+    "nodejs"
+  ],
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  },
+  "directories": {
+    "test": "test"
+  },
+  "author": "Nextbridge",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nextbridgehq/agent-loop-guard.git"
+  },
+  "bugs": {
+    "url": "https://github.com/nextbridgehq/agent-loop-guard/issues"
+  },
+  "homepage": "https://github.com/nextbridgehq/agent-loop-guard#readme",
+  "publishConfig": {
+    "access": "public"
+  },
+  "sideEffects": false,
+  "types": "src/index.d.ts",
+  "devDependencies": {
+    "typescript": "^7.0.2"
+  }
+}
