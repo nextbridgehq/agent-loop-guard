@@ -354,12 +354,14 @@ test("memory tracking remains bounded by configured call and history limits", ()
     guard.afterCall(`tool-${index}`, { index }, { index });
   }
 
-  assert.deepEqual(guard.summary(), {
-    totalCalls: 3,
-    uniqueCallSignatures: 3,
-    budgetRemaining: 0,
-  });
+  const summary = guard.summary();
+  assert.equal(summary.totalCalls, 3);
+  assert.equal(summary.uniqueCallSignatures, 3);
+  assert.equal(summary.budgetRemaining, 0);
+  assert.equal(summary.blockedCalls, 17);
+  assert.deepEqual(summary.callsByTool, { "tool-0": 1, "tool-1": 1, "tool-2": 1 });
   assert.ok(guard.callHistory.length <= 4);
+  assert.ok(guard.recentSignatures.length === 0);
 });
 
 test("detects cyclic patterns (A B C A B C)", () => {
@@ -585,7 +587,17 @@ test("maxCycleLength accepts its documented upper bound (1000)", () => {
 test("only documented LoopGuard methods are publicly callable on the prototype", () => {
   assert.deepEqual(
     Object.getOwnPropertyNames(LoopGuard.prototype).sort(),
-    ["afterCall", "beforeCall", "constructor", "reset", "summary"]
+    [
+      "afterCall",
+      "afterError",
+      "beforeCall",
+      "constructor",
+      "report",
+      "reset",
+      "run",
+      "summary",
+      "toJSON",
+    ].sort()
   );
 });
 

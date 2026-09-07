@@ -1,6 +1,6 @@
 {
   "name": "agent-loop-guard",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Detect repeated, stagnant, and cyclic tool calls, and enforce call-budget limits for LLM agents",
   "type": "module",
   "main": "./src/index.js",
@@ -23,6 +23,8 @@
     "llm",
     "agent",
     "loop-detection",
+    "agent-guardrails",
+    "tool-calling-budget",
     "tool-calling",
     "ai-agents",
     "autonomous-agents",
